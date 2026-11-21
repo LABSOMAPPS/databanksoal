@@ -1036,6 +1036,50 @@ th.sortable:hover{color:var(--accent-ink)}
 th.sortable:hover i{color:var(--accent)}
 th.sortable.on{color:var(--accent-ink)}
 th.sortable.on i{color:var(--accent);font-weight:800}
+
+/* bagan donat */
+:root{--d-sudah:#10b981;--d-proses:#f5b301;--d-belum:#cbd5d1}
+[data-theme="dark"]{--d-belum:#33463e}
+.donut-panel{margin-bottom:18px}
+.dp-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.dp-head h2{margin:0}
+.donuts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.donut{display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 12px;border:1px solid var(--line);border-radius:20px;background:var(--surface-2);
+  font:inherit;color:var(--ink);cursor:pointer;transition:transform .15s,border-color .15s,box-shadow .15s}
+.donut:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 10px 24px -12px rgba(16,168,116,.45)}
+.d-title{font-weight:800;font-size:15px}
+.d-chart{position:relative;width:140px;height:140px}
+.d-chart circle{transition:stroke-dasharray .6s ease}
+.d-mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.d-mid b{font-size:26px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.d-mid span{font-size:12px;color:var(--muted);font-weight:600}
+.d-legend{display:flex;flex-direction:column;gap:5px;width:100%;max-width:170px;font-size:13px;color:var(--ink-2)}
+.d-legend div{display:flex;align-items:center;gap:8px}
+.d-legend i{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.d-legend b{margin-left:auto;font-variant-numeric:tabular-nums}
+@media (max-width:600px){
+  .donuts{grid-template-columns:repeat(3,1fr);gap:6px}
+  .donut{padding:10px 4px;border-radius:14px;gap:6px}
+  .d-title{font-size:12.5px}
+  .d-chart,.d-chart svg{width:88px;height:88px}
+  .d-mid b{font-size:16px}.d-mid span{font-size:9.5px}
+  .d-legend{font-size:10.5px;gap:3px;padding:0 4px}
+  .d-legend i{width:8px;height:8px}
+  .dp-head .hint{font-size:11px}
+}
+
+:root{--d-pg:#3b82f6;--d-mel:#8b5cf6;--d-esai:#f97316}
+.donuts{grid-template-columns:repeat(4,1fr)}
+.donut.tipe{cursor:default}
+.donut.tipe:hover{transform:none;border-color:var(--line);box-shadow:none}
+.donut.tipe .d-mid b{font-size:22px}
+.donut.tipe .d-legend{max-width:190px}
+@media (max-width:1100px) and (min-width:601px){ .donuts{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:600px){
+  .donuts{grid-template-columns:repeat(2,1fr);gap:8px}
+  .d-chart,.d-chart svg{width:100px;height:100px}
+  .donut.tipe .d-mid b{font-size:15px}
+}
 </style>
 </head>
 <body class="locked">
@@ -1256,7 +1300,7 @@ const DEMO_DATA = {
  *  PENGATURAN — tempel alamat Web App Apps Script Anda di sini
  *  (Terapkan → Kelola deployment → salin "URL aplikasi web", berakhiran /exec)
  * ===================================================================== */
-const API_URL = 'https://script.google.com/macros/s/AKfycbwmZZR-DJbjII7kRayH23I_JobHM-vnjaZIG7-4aMAySIfsxTHVLQeP3FF_xMNfWx3V/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbwQwcjRta-TrUu6dmj6-veZUt_7gAUr-QZkgnsHvovdhtYCsDHT9NYevM13V5_NZ7lkaA/exec';
 
 /* ---------- koneksi ke Apps Script (fetch) ---------- */
 const AUTH={token:null,user:null};
@@ -1360,6 +1404,10 @@ function renderRingkasan(){
     <div class="kpi"><div class="kpi-top"><div class="l">Tashih selesai</div><div class="kpi-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div></div><div class="v">${pct(c('t'),T)}%</div><div class="s">${c('t')} dari ${T}</div><div class="bar"><i style="width:${pct(c('t'),T)}%"></i></div></div>
     <div class="kpi"><div class="kpi-top"><div class="l">Entry selesai</div><div class="kpi-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div></div><div class="v">${pct(c('e'),T)}%</div><div class="s">${c('e')} dari ${T} · ${full} lengkap</div><div class="bar"><i style="width:${pct(c('e'),T)}%"></i></div></div>
     <div class="kpi"><div class="kpi-top"><div class="l">Soal tercatat</div><div class="kpi-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div></div><div class="v">${soal.toLocaleString('id-ID')}</div><div class="s">PG + Melengkapi + Esai</div></div>
+  </div>
+  <div class="panel donut-panel">
+    <div class="dp-head"><h2>Rekap Word · Tashih · Entry &amp; Tipe Soal</h2><span class="hint" style="margin:0">dari ${T} kitab × imda · klik bagan tahap untuk melihat yang belum selesai</span></div>
+    <div class="donuts">${['w','t','e'].map(k=>donut(k,B)).join('')}${donutTipe(B)}</div>
   </div>
   <div class="grid2">
     <div class="panel"><h2>Kemajuan per kelas</h2>
@@ -1514,6 +1562,49 @@ document.addEventListener('click',e=>{ const b=e.target.closest&&e.target.closes
   const k=b.dataset.pg; PAGE[k].page=+b.dataset.to; k==='bank'?renderBank():renderTugas();
   const tw=$(k==='bank'?'#tBank':'#tTugas').closest('.tw'); const y=tw.getBoundingClientRect().top+scrollY-90; if(scrollY>y) scrollTo({top:y,behavior:'smooth'}); });
 
+
+
+/* ---------- bagan donat Word / Tashih / Entry ---------- */
+const STAGE={w:'Word',t:'Tashih',e:'Entry'};
+const DCOL={SUDAH:'var(--d-sudah)',PROSES:'var(--d-proses)',BELUM:'var(--d-belum)'};
+function donut(k,B){
+  const tot=B.length||1, c={SUDAH:0,PROSES:0,BELUM:0};
+  B.forEach(r=>c[r[k]||'BELUM']++);
+  const R=52, C=2*Math.PI*R; let off=0;
+  const segs=['SUDAH','PROSES','BELUM'].filter(x=>c[x]).map(x=>{
+    const len=c[x]/tot*C, gap=(c.SUDAH&&c.PROSES||c.BELUM&&c.SUDAH)&&c[x]<tot?1.5:0;
+    const seg=`<circle r="${R}" cx="70" cy="70" fill="none" stroke="${DCOL[x]}" stroke-width="18" stroke-dasharray="${Math.max(len-gap,0.01)} ${C}" stroke-dashoffset="${-off}" transform="rotate(-90 70 70)"><title>${LBL[x]}: ${c[x]} dari ${B.length} (${pct(c[x],B.length)}%)</title></circle>`;
+    off+=len; return seg; }).join('');
+  return `<button class="donut" data-stage="${k}" title="Lihat ${STAGE[k]} yang belum selesai">
+    <div class="d-title">${STAGE[k]}</div>
+    <div class="d-chart"><svg viewBox="0 0 140 140" width="140" height="140" aria-hidden="true">
+      <circle r="${R}" cx="70" cy="70" fill="none" stroke="var(--surface-2)" stroke-width="18"/>${segs}</svg>
+      <div class="d-mid"><b>${pct(c.SUDAH,B.length)}%</b><span>selesai</span></div></div>
+    <div class="d-legend">${['SUDAH','PROSES','BELUM'].map(x=>`<div><i style="background:${DCOL[x]}"></i>${LBL[x]}<b>${c[x]}</b></div>`).join('')}</div>
+  </button>`;
+}
+document.addEventListener('click',e=>{ const d=e.target.closest&&e.target.closest('.donut[data-stage]'); if(!d) return;
+  $('#fTk').value='';$('#fKl').value='';$('#fIm').value='';$('#fQ').value=''; $('#fSt').value=d.dataset.stage; PAGE.bank.page=1; go('bank'); });
+
+
+/* donat persentase tipe soal: Pilihan Ganda, Melengkapi, Esai */
+const TIPE=[['pg','Pilihan Ganda','var(--d-pg)'],['m','Melengkapi','var(--d-mel)'],['es','Esai','var(--d-esai)']];
+function donutTipe(B){
+  const v=TIPE.map(([k])=>B.reduce((s,r)=>s+n(r[k]),0)), tot=v.reduce((a,b)=>a+b,0);
+  const R=52, C=2*Math.PI*R; let off=0;
+  const segs=tot?TIPE.map(([k,l,col],i)=>{ if(!v[i]) return '';
+    const len=v[i]/tot*C, gap=v.filter(Boolean).length>1?1.5:0;
+    const sg=`<circle r="${R}" cx="70" cy="70" fill="none" stroke="${col}" stroke-width="18" stroke-dasharray="${Math.max(len-gap,0.01)} ${C}" stroke-dashoffset="${-off}" transform="rotate(-90 70 70)"><title>${l}: ${v[i].toLocaleString('id-ID')} soal (${(v[i]/tot*100).toFixed(1).replace('.',',')}%)</title></circle>`;
+    off+=len; return sg; }).join(''):'';
+  const p=i=>tot?(v[i]/tot*100).toFixed(1).replace('.',',').replace(',0',''):'0';
+  return `<div class="donut tipe">
+    <div class="d-title">Tipe Soal</div>
+    <div class="d-chart"><svg viewBox="0 0 140 140" width="140" height="140" aria-hidden="true">
+      <circle r="${R}" cx="70" cy="70" fill="none" stroke="var(--surface-2)" stroke-width="18"/>${segs}</svg>
+      <div class="d-mid"><b>${tot.toLocaleString('id-ID')}</b><span>soal</span></div></div>
+    <div class="d-legend">${TIPE.map(([k,l,col],i)=>`<div title="${v[i].toLocaleString('id-ID')} soal"><i style="background:${col}"></i>${l}<b>${p(i)}%</b></div>`).join('')}</div>
+  </div>`;
+}
 
 /* ---------- urutkan per kolom (A→Z / Z→A) ---------- */
 const SORT={bank:{k:null,dir:1},tugas:{k:null,dir:1}};
